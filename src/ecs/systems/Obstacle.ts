@@ -8,7 +8,7 @@ export class ObstacleSystem extends AbstractActor {
   createReceive() {
     return this.receiveBuilder()
       .match(Update, () => {
-        const obstacle = createObstacle()
+        const obstacle = createObstacle(this.world.worldWidth, this.world.worldHeight)
         this.world.obstacleGroup.addEntity(obstacle)
         // 判断是否需要生成新障碍，添加删除 Obstacle 实体
         // 判断是否碰撞

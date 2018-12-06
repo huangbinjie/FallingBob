@@ -11,7 +11,7 @@ canvas.setAttribute("width", "800")
 canvas.setAttribute("height", "600")
 
 const ctx = canvas.getContext("2d")!
-const world = new World(ctx, genBoards(20, 20), 20, 20)
+const world = new World(ctx, genBoards(20, 30), 20, 30)
 
 world.start()
 

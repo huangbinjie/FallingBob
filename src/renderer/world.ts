@@ -15,9 +15,9 @@ export class World {
 
   constructor(
     private ctx: CanvasRenderingContext2D,
-    private boards: number[][],
-    private worldWidth: number,
-    private worldHeight: number
+    public boards: number[][],
+    public worldWidth: number,
+    public worldHeight: number
   ) { }
 
   start() {
