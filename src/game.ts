@@ -1,14 +1,19 @@
-import { WorldUitl } from "./renderer";
+import { World } from "./renderer/world";
 
-const canvas = document.getElementsByTagName("canvas")[0] || document.createElement("canvas")
+let canvas
+if (document.getElementsByTagName("canvas")[0]) {
+  canvas = document.getElementsByTagName("canvas")[0]
+} else {
+  canvas = document.createElement("canvas")
+  document.body.appendChild(canvas)
+}
 canvas.setAttribute("width", "800")
 canvas.setAttribute("height", "600")
-document.body.appendChild(canvas)
 
-const ctx = canvas.getContext("2d")
-const util = new WorldUitl(ctx, genBoards(20, 20), 20, 20)
-util.drawBoard()
-util.drawPlayer()
+const ctx = canvas.getContext("2d")!
+const world = new World(ctx, genBoards(20, 20), 20, 20)
+
+world.start()
 
 function genBoards(row: number, col: number) {
   const boards = new Array(row);
