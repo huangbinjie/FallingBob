@@ -1,9 +1,9 @@
-import { AbstractActor } from "js-actor";
 import { World } from "../../renderer/world";
 import { PositionComponent } from "../components/Position";
 import { ShapeComponent } from "../components/Shape";
+import { BonusComponent } from "../components/Bonus";
 
-export function DeadSystem(world: World) {
+export function ScoreSystem(world: World) {
   const playerPosition = world.player.get(PositionComponent)
   const playerShape = world.player.get(ShapeComponent)
 
@@ -12,10 +12,11 @@ export function DeadSystem(world: World) {
   const playerX1 = playerPosition.x
   const playerX2 = playerPosition.x + playerShape.width
 
-  const obstacles = world.obstacleGroup.getEntities()
-  for (let obstacle of obstacles) {
-    const { x, y } = obstacle.get(PositionComponent)
-    const shape = obstacle.get(ShapeComponent)
+  const bonuses = world.bonusGroup.getEntities()
+  for (let bonus of bonuses) {
+    const { x, y } = bonus.get(PositionComponent)
+    const shape = bonus.get(ShapeComponent)
+    const { score } = bonus.get(BonusComponent)
 
     const ox1 = x
     const oy1 = y
@@ -23,13 +24,15 @@ export function DeadSystem(world: World) {
     const oy2 = y + shape.height
 
     if (playerY2 > oy1 && playerY1 < oy2) {
-      // 障碍物在玩家左侧
+      // 在玩家左侧
       if (ox1 < playerX1 && playerX1 < ox2) {
-        world.stoped = true
+        world.score += score
+        world.bonusGroup.removeEntity(bonus)
       }
 
       if (ox1 < playerX2 && playerX2 < ox2) {
-        world.stoped = true
+        world.score += score
+        world.bonusGroup.removeEntity(bonus)
       }
     }
   }

@@ -36,6 +36,20 @@ export class WorldUtil {
     this.ctx.fillRect(x, y, width, height)
   }
 
+  drawBonus(bonus: Entity) {
+    const { x, y } = bonus.get(PositionComponent)
+    const { value: color } = bonus.get(ColorComponent)
+    const { width, height } = bonus.get(ShapeComponent)
+
+    this.ctx.fillStyle = color
+    this.ctx.fillRect(x, y, width, height)
+  }
+
+  drawScore(score: number) {
+    this.ctx.fillStyle = "red"
+    this.ctx.fillText("分数: " + score, 10, 10)
+  }
+
   checkOccupancy(dx: number, dy: number, shape: ShapeComponent) {
     const tx = dx + shape.width
     const ty = dx + shape.height
