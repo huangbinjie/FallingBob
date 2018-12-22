@@ -21,12 +21,12 @@ export function EdgeSystem(world: World) {
     }
   }
 
-  const bonuses = world.bonusGroup.getEntities()
-  for (let bonus of bonuses) {
-    const position = bonus.get(PositionComponent)
-    const { height } = bonus.get(ShapeComponent)
-    if (position.y + height < 0) {
-      world.obstacleGroup.removeEntity(bonus)
-    }
-  }
+  // const bonuses = world.bonusGroup.getEntities()
+  // for (let bonus of bonuses) {
+  //   const position = bonus.get(PositionComponent)
+  //   const { height } = bonus.get(ShapeComponent)
+  //   if (position.y + height < 0) {
+  //     world.obstacleGroup.removeEntity(bonus)
+  //   }
+  // }
 }

@@ -18,8 +18,8 @@ export function MovementSystem(world: World) {
 
   // 判断玩家是否左右出界
   if (position.x + width > world.worldWidth) {
-    position.x = world.worldWidth - width - speed
+    position.x = world.worldWidth - width
   } else if (position.x < 0) {
-    position.x = 0 + speed
+    position.x = 0
   }
 }

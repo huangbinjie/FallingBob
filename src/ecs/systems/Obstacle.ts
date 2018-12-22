@@ -13,13 +13,14 @@ export function ObstacleSystem(world: World) {
   const maxGapTick = Math.floor(GAP_TICK * MAX_GAP_TICK_COEFFICIENT)
   const minGapTick = Math.floor(GAP_TICK * MIN_GAP_TICK_COEFFICIENT)
   const gapTick = getRandomNum(minGapTick, maxGapTick)
-
-  if (world.tickTime % (gapTick + GAP_TICK) === 0) {
+  
+  if (world.tickTime % gapTick === 0) {
     const obstacle = createObstacle(world.worldWidth, world.worldHeight)
     world.obstacleGroup.addEntity(obstacle)
+    world.tickTime = 0
   }
 }
 
-const GAP_TICK = 100
-const MIN_GAP_TICK_COEFFICIENT = .5
+const GAP_TICK = 60
+const MIN_GAP_TICK_COEFFICIENT = 1
 const MAX_GAP_TICK_COEFFICIENT = 1.5

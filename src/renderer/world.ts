@@ -47,8 +47,6 @@ export class World {
     }, true)
     this.systems.push(MovementSystem)
     this.systems.push(EdgeSystem)
-    this.systems.push(BonusSystem)
-    this.systems.push(ScoreSystem)
     this.systems.push(ObstacleSystem)
     this.systems.push(FloatageSystem)
     this.systems.push(DeadSystem)
