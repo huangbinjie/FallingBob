@@ -1,35 +1,21 @@
-import { World } from "./renderer/world";
+import { World } from "./world";
+import { Game } from "../engine/game";
+import { StageManager } from "../engine/manager/stage";
+import { MainStage } from "./stages/main";
 
-let canvas
-if (document.getElementsByTagName("canvas")[0]) {
-  canvas = document.getElementsByTagName("canvas")[0]
-} else {
-  canvas = document.createElement("canvas")
-  document.body.appendChild(canvas)
-}
-canvas.setAttribute("width", "800")
-canvas.setAttribute("height", "600")
+
+const canvas = document.getElementsByTagName("canvas")[0]
+
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
 
 const ctx = canvas.getContext("2d")!
-const world = new World(ctx, genBoards(400, 600), 400, 600)
 
-world.start()
+ctx.scale(window.innerWidth / screen.width, window.innerHeight / screen.height)
+const world = new World(ctx, screen.width, screen.height)
 
-function genBoards(row: number, col: number) {
-  const boards = new Array(row);
-  for (var i = 0; i < row; i++) {
-    boards[i] = new Array(col);
-    for (var j = 0; j < col; j++) {
-      boards[i][j] = 0;
-    }
-  }
+const game = new Game({})
 
-  const bkBoards = new Array(row);
-  for (var i = 0; i < row; i++) {
-    bkBoards[i] = new Array(col);
-    for (var j = 0; j < col; j++) {
-      bkBoards[i][j] = 0;
-    }
-  }
-  return boards
-}
+StageManager.of(world).replace(new MainStage())
+
+game.run()
